@@ -1,0 +1,113 @@
+<nav class="navbar navbar-expand-md navbar-dark " style="background-color: orangered;">
+    <a [routerLink]="['/menu-item-list']" class="navbar-brand">
+        <span class="material-icons align-middle">restaurant_menu</span>truYum
+    </a>
+    <button role="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a [routerLink]="['/menu-item-list']" class="nav-link text-light">Menu Items</a>
+            </li>
+            <li class="nav-item"><a [routerLink]="['/login']" class="nav-link text-light">Login</a>
+            </li>
+            <li class="nav-item"><a [routerLink]="['/sign-up']" class="nav-link text-light">Sign Up</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 mr-auto ml-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="card-title">Signup</h3>
+                        </div>
+                    </div>
+                    <form class="form" novalidate [formGroup]="signUpForm" 
+                    (ngSubmit)="createUser(signUpForm)">
+                        <div class="row pb-2">
+                            <div class="col-md-6">
+                                <label for="userName">Username</label>
+                                <input type="text" name="userName" id="userName" class="form-control"
+                                    placeholder="Enter Username" formControlName="userName">
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-md-6">
+                                <div *ngIf="SignUpForm.userName.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.userName.errors?.required">Username cannot be empty</span>
+                                    <span class="small text-danger" *ngIf="SignUpForm.userName.errors?.minlength">Username must be atleast 6 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row pb-2">
+                            <div class="col-md-6">
+                                <label for="firstName">First Name</label>
+                                <input type="text" name="firstName" id="firstName" class="form-control"
+                                    placeholder="Enter First Name" formControlName="firstName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" name="lastName" id="lastName" class="form-control"
+                                    placeholder="Enter Last Name" formControlName="lastName">
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-md-6">
+                                <div *ngIf="SignUpForm.firstName.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.firstName.errors?.required">Firstname cannot be empty</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div *ngIf="SignUpForm.lastName.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.lastName.errors?.required">Lastname cannot be empty</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-md-6">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Enter Password" formControlName="password">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cnfrm_password">Confirm Password</label>
+                                <input type="password" name="cnfrm_password" id="cnfrm_password"
+                                    class="form-control" placeholder="Enter Confirm Password" formControlName="cnfPassword">
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-md-6">
+                                <div *ngIf="SignUpForm.password.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.password.errors?.required">Password cannot be empty</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div *ngIf="SignUpForm.cnfPassword.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.cnfPassword.errors?.required">Confirm password cannot be empty</span>
+                                </div>
+                                <div *ngIf="SignUpForm.cnfPassword.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.cnfPassword.errors?.mustMatch">Passwords must match</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                                <button [disabled]="signUpForm.invalid" class="btn" style="background-color: orangered;">Signup</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="container-fluid text-light" style="background-color: orangered;">
+        <p class="m-0">Copyright 2020</p>
+    </div>
+</footer>

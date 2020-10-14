@@ -1,0 +1,130 @@
+<nav class="navbar navbar-expand-md navbar-dark " style="background-color: orangered;">
+    <a [routerLink]="['/menu-item-list']" class="navbar-brand">
+        <span class="material-icons align-middle">restaurant_menu</span>truYum
+    </a>
+    <button role="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a [routerLink]="['/menu-item-list']" class="nav-link text-light">Menu Items</a>
+            </li>
+            <li  class="nav-item d-inline"><a *ngIf="user!=undefined && !user.admin" [routerLink]="['/cart']" class="nav-link text-light">Cart</a>
+            </li>
+            <li  class="nav-item d-inline"><a *ngIf="user!=undefined else anonymous2"  class="nav-link text-light">
+                    <span class="material-icons align-middle">
+                        person
+                    </span>{{user.firstName+' '+user.lastName}}</a></li>
+            <li class="nav-item d-inline"><a [routerLink]="['/sign-out']" 
+                *ngIf="user!=undefined else anonymous" class="nav-link text-light">Signout</a></li>
+            <ng-template #anonymous2>
+                <li class="nav-item"><a [routerLink]="['/login']" class="nav-link text-light">Login</a>
+                </li>
+            </ng-template>
+            <ng-template #anonymous>
+                <li class="nav-item"><a [routerLink]="['/sign-up']" class="nav-link text-light">Sign Up</a>
+                </li>
+            </ng-template> 
+        </ul>
+    </div>
+</nav>
+
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="font-weight-normal">Edit Menu Item</h3>
+            <form novalidate class="form" #editItem="ngForm" (ngSubmit)="saveChanges(editItem)">
+                <div class="row pt-2 pb-2">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="itemName">Item Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="foodName" id="foodName" class="form-control" required [(ngModel)]="foodItem.foodName" #foodName="ngModel">
+                            </div>
+                        </div>
+                        <div *ngIf="foodName.touched && foodName.dirty && !foodName.pristine">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="small text-danger" *ngIf="foodName.errors?.required">Item Name is required</span>
+                                </div>
+                            </div><div class="row">
+                                <div class="col-md-12">
+                                    <span class="small text-danger" *ngIf="foodItem.foodName.length>200">Item Name cannot exceed 200 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 pt-1 pb-1">
+                        <label for="price">Price</label>
+                        <input type="number" name="price" id="price" class="form-control" required 
+                        [(ngModel)]="foodItem.price" #price="ngModel">
+                        <div *ngIf="price.touched && price.dirty && !price.pristine">
+                            <span class="small text-danger" *ngIf="price.errors?.required">Price is required</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 pt-1 pb-1">
+                        <label for="dateOfLaunch">Date of Launch</label>
+                        <input type="text" name="DOL" id="DOL" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" class="form-control" required [(ngModel)]="date" #DOL="ngModel">
+                        <div *ngIf="DOL.touched && DOL.dirty && !DOL.pristine">
+                            <span class="small text-danger" *ngIf="DOL.errors?.required">Date is required</span>
+                        </div>
+                        <div *ngIf="DOL.touched && DOL.dirty && !DOL.pristine">
+                            <span class="small text-danger" *ngIf="DOL.errors?.pattern">Wrong date format</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 pt-1 pb-1">
+                        <label for="category">Category</label>
+                        <select type="text" name="category" id="category" class="form-control" required [(ngModel)]="foodItem.category" #category="ngModel">
+                            <option value="Starter">Starter</option>
+                            <option value="Main Course">Main Course</option>
+                            <option value="Dessert">Dessert</option>
+                        </select>
+                        <div *ngIf="category.touched && category.dirty && !category.pristine">
+                            <span class="small text-danger" *ngIf="category.errors?.required">Category is required</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 pt-1 pb-1">
+                        <label class="d-block">Active</label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" [(ngModel)]="inStock" value="true">
+                            <label class="custom-control-label" for="customRadioInline1">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" [(ngModel)]="inStock" value="false">
+                          <label class="custom-control-label" for="customRadioInline2">No</label>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="row pt-2 pb-2">
+                    <div class="col-lg-3 pt-1 pb-1">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="freeDelv" id="freedelivery" class="custom-control-input" [(ngModel)]="foodItem.freeDelv">
+                            <label for="freedelivery" class="custom-control-label">
+                                Free Delivery
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-2 pb-2">
+                    <div class="col-lg-3 pt-1 pb-1">
+                        <button [disabled]="editItem.invalid" class="btn" style="background-color: orangered;">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container-fluid text-light" style="background-color: orangered;">
+        <p class="m-0">Copyright 2020</p>
+    </div>
+</footer>

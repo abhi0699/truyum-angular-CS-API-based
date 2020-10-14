@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: orangered;">
+    <a [routerLink]="['/menu-item-list']" class="navbar-brand">
+        <span class="material-icons align-middle">restaurant_menu</span>truYum
+    </a>
+    <button role="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a [routerLink]="['/menu-item-list']" class="nav-link text-light">Menu Items</a>
+            </li>
+            <li  class="nav-item d-inline"><a *ngIf="user!=undefined && !user.admin"
+                [routerLink]="['/cart']" class="nav-link text-light">Cart</a>
+            </li>
+            <li  class="nav-item d-inline"><a *ngIf="user!=undefined else anonymous2"
+                [routerLink]="['/user',user.userName]" class="nav-link text-light">
+                    <span class="material-icons align-middle">
+                        person
+                    </span>{{user.firstName+' '+user.lastName}}</a></li>
+            <li class="nav-item d-inline"><a [routerLink]="['/sign-out']" 
+                *ngIf="user!=undefined else anonymous" class="nav-link text-light">Signout</a></li>
+            <ng-template #anonymous2>
+                <li class="nav-item"><a [routerLink]="['/login']" class="nav-link text-light">Login</a>
+                </li>
+            </ng-template>
+            <ng-template #anonymous>
+                <li class="nav-item"><a [routerLink]="['/sign-up']" class="nav-link text-light">Sign Up</a>
+                </li>
+            </ng-template> 
+        </ul>
+    </div>
+</nav>
+
+<app-food-search (searching)="getMenuItem($event)"></app-food-search>
+
+<div *ngIf="menuItemList.length!=0 else emptyList">
+    <div class="container-fluid pt-5">
+
+        <div class="row pt-1">
+            <div class="col-lg-3 col-md-6" *ngFor="let menuItem of menuItemList">
+                <app-food-item-info [item]="menuItem" [loggedInUser]="user" (onAdding)="addToCart($event)"></app-food-item-info>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #emptyList>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-10 ml-auto mr-auto text-center">
+                <h1>No Results !</h1>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<footer class="footer footer-menu">
+    <div class="container-fluid text-light" style="background-color: orangered;">
+        <p class="m-0">Copyright 2020</p>
+    </div>
+</footer>

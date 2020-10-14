@@ -1,0 +1,120 @@
+.delete:hover{
+    cursor: pointer;
+    color: red ;
+}
+.btn.btn-light.btn-search.rounded-left{
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+    float: left;
+    border:0;
+}
+.btn.btn-light.btn-search:disabled{
+    background-color: white;
+    opacity: 100% ;
+}
+.btn.btn-light.btn-search:hover{
+    background-color: white;
+}
+@media only screen and (min-width: 768px){
+.form-control.search{
+    float: left ;
+    border-top-left-radius: 0% ;
+    border-bottom-left-radius: 0% ;
+    width: 90% ;
+    height: 100%;
+}
+}
+@media only screen and (min-width: 800px){
+.form-control.search{
+    float: left ;
+    border-top-left-radius: 0% ;
+    border-bottom-left-radius: 0% ;
+    width: 90% ;
+    height: 100%;
+}
+}
+@media only screen and (max-width: 800px){
+.form-control.search{
+    float: left ;
+    border-top-left-radius: 0% ;
+    border-bottom-left-radius: 0% ;
+    width: 80% ;
+    height: 100%;
+}
+}
+.custom-control-input:checked~.custom-control-label::before {
+    color: white ;
+    border-color: orangered;
+    background-color:orangered ;
+}
+
+
+.container-fluid.findfood{
+        padding-top:5.0%;
+
+}
+@media only screen and (min-width: 800px){
+.header{
+    background-image: url("https://images.unsplash.com/photo-1505826759037-406b40feb4cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=500&q=60");
+    height: 400px ;
+    background-size: 800px;
+}
+}
+@media only screen and (max-width: 800px){
+.header{
+    background-image: url("https://images.unsplash.com/photo-1505826759037-406b40feb4cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=500&q=60");
+    height: 400px ;
+    background-repeat: no-repeat ;
+}
+}
+@media only screen and (min-width: 800px){
+.resp-image{
+    width: 40%;
+}
+}
+@media only screen and (max-width: 800px){
+.resp-image{
+    width: 100%;
+}
+}
+.text-blue{
+    color:blue;
+}
+.img-fluid{
+    width: 300px ;
+}
+.tiny{
+    font-size: 10px;
+}
+
+.material-icons.md-14 {
+    font-size: 14px;
+}
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-20 {
+    font-size: 20px;
+}
+.card.secondRow{
+    margin-left:12px;
+}
+.footer {
+    position: fixed;
+    bottom: 0px;
+    height: 30px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    line-height: 30px;
+}
+.footer.footer-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+}

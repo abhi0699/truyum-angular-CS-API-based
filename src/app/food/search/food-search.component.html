@@ -1,0 +1,19 @@
+<div class="container-fluid header">
+    <div class="container-fluid findfood">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="font-weight-normal text-light">Find Food</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="d-inline btn btn-light btn-search rounded-left" disabled>
+                    <span class="material-icons align-middle text-secondary">
+                        local_cafe
+                    </span>
+                </button>
+                <input type="search" [(ngModel)]="searchText" (input)="onSearch()" class="d-inline search form-control" placeholder="Search food">
+            </div>
+        </div>
+    </div>
+</div>
