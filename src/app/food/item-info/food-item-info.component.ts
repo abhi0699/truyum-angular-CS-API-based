@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'src/app/food-item';
 import { AuthService } from 'src/app/site/auth.service';
+import { LoggedUserInfo } from 'src/app/site/user-info';
 
 @Component({
   selector: 'app-food-item-info',
@@ -10,18 +11,17 @@ import { AuthService } from 'src/app/site/auth.service';
 export class FoodItemComponent implements OnInit {
 
   @Input() item: MenuItem;
-  @Input() loggedInUser;
+  @Input() loggedInUser: LoggedUserInfo;
   @Output() onAdding: EventEmitter<number> = new EventEmitter<number>();
   admin: boolean;
   itemAdded: boolean;
 
   constructor(private authService: AuthService) {
-    this.loggedInUser = authService.loggedInUser;
-    if(this.loggedInUser!=undefined){
-    this.admin=this.loggedInUser.admin;
-  }
+    this.loggedInUser = authService.loggedUser;
+    if(this.loggedInUser==undefined || !this.loggedInUser.isAdmin)
+      this.admin = false;
     else
-    this.admin=false;
+    this.admin = true;
   }
 
   ngOnInit(): void {

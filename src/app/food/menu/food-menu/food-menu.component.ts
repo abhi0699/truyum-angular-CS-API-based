@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/site/auth.service';
 import { User } from 'src/app/site/user';
+import { LoggedUserInfo } from 'src/app/site/user-info';
 import { MenuItem } from '../../../food-item';
 import { FoodService } from '../../food.service';
 
@@ -13,44 +14,54 @@ import { FoodService } from '../../food.service';
 export class FoodMenuComponent implements OnInit {
 
   menuItemList: Array<MenuItem>;
-  user: User;
+  user: LoggedUserInfo;
 
-  constructor(private menuService: FoodService, private authService: AuthService, private route: Router) {
+  constructor(private menuService: FoodService, private authService: AuthService, private route: Router, private foodService: FoodService) {
     this.menuItemList = new Array<MenuItem>();
-    this.user = authService.loggedInUser;
-    if(this.user!=undefined && this.user.admin)
-    this.menuItemList = menuService.editedMenuItems == undefined ? menuService.getFoodItems() : menuService.editedMenuItems;
-    else{
-      let today = new Date();
-      menuService.getFoodItems().forEach(f => {
-        if(f.isActive && f.DOL < today)
-          this.menuItemList.push(f);
-      });
-    }
+    this.user = authService.loggedUser;
+    this.getFoodItems();
   }
 
-  getMenuItem($event): void {
+  getFoodItems() {
     this.menuItemList = new Array<MenuItem>();
-    if (($event as string).length != 0)
-      this.menuItemList = this.menuService.getItem($event);
-    else {
-      this.menuItemList = new Array<MenuItem>();
-      this.menuService.getFoodItems().forEach(f => {
-        if(f.isActive)
-          this.menuItemList.push(f);
-      });
-    }
+    let items: MenuItem[] = [];
+    this.foodService.genUrl(this.user);
+    this.foodService.get().subscribe(
+      i => {
+        items = i;
+        items.forEach(x => {
+          this.menuItemList.push(x);
+        });
+      },
+      err => console.log(err)
+    );
+  }
 
+  getMenuItems($event): void {
+    this.menuItemList = new Array<MenuItem>();
+    if (($event as string).length != 0){
+      let items: MenuItem[] = [];
+      this.foodService.genUrl(this.user);
+      this.foodService.searchItem($event as string).subscribe(
+        m => {
+          items = m;
+          items.forEach(x => {
+            x.DOL = this.foodService.date(x.DOL);
+            this.menuItemList.push(x);
+          });
+        },
+        err => console.log(err)
+      );
+    }
+    else
+    this.getFoodItems();
   }
 
   addToCart($event): void {
-    this.menuService.addToCart($event, 1);
+    
   }
 
-  ngOnInit(): void {
-    if(this.user==undefined)
-      this.route.navigateByUrl('/menu-item-list');
-    
+  ngOnInit() {
   }
 
 }
