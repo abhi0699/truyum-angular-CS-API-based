@@ -43,17 +43,18 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="text" name="foodName" id="foodName" class="form-control" required [(ngModel)]="foodItem.foodName" #foodName="ngModel">
+                                <input type="text" name="foodName" id="foodName" class="form-control" required 
+                                [(ngModel)]="foodItem.name" #name="ngModel">
                             </div>
                         </div>
-                        <div *ngIf="foodName.touched && foodName.dirty && !foodName.pristine">
+                        <div *ngIf="name.touched && name.dirty && !name.pristine">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <span class="small text-danger" *ngIf="foodName.errors?.required">Item Name is required</span>
+                                    <span class="small text-danger" *ngIf="name.errors?.required">Item Name is required</span>
                                 </div>
                             </div><div class="row">
                                 <div class="col-md-12">
-                                    <span class="small text-danger" *ngIf="foodItem.foodName.length>200">Item Name cannot exceed 200 characters</span>
+                                    <span class="small text-danger" *ngIf="foodItem.name.length>200">Item Name cannot exceed 200 characters</span>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +71,8 @@
                     </div>
                     <div class="col-lg-3 pt-1 pb-1">
                         <label for="dateOfLaunch">Date of Launch</label>
-                        <input type="text" name="DOL" id="DOL" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" class="form-control" required [(ngModel)]="date" #DOL="ngModel">
+                        <input type="text" name="DOL" id="DOL" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" 
+                        class="form-control" required [(ngModel)]="foodItem.dol" #DOL="ngModel">
                         <div *ngIf="DOL.touched && DOL.dirty && !DOL.pristine">
                             <span class="small text-danger" *ngIf="DOL.errors?.required">Date is required</span>
                         </div>
@@ -92,11 +94,13 @@
                     <div class="col-lg-3 pt-1 pb-1">
                         <label class="d-block">Active</label>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" [(ngModel)]="inStock" value="true">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input"
+                             [(ngModel)]="inStock" value="true">
                             <label class="custom-control-label" for="customRadioInline1">Yes</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                          <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" [(ngModel)]="inStock" value="false">
+                          <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input"
+                           [(ngModel)]="inStock" value="false">
                           <label class="custom-control-label" for="customRadioInline2">No</label>
                         </div>
                        
@@ -106,7 +110,7 @@
                 <div class="row pt-2 pb-2">
                     <div class="col-lg-3 pt-1 pb-1">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="freeDelv" id="freedelivery" class="custom-control-input" [(ngModel)]="foodItem.freeDelv">
+                            <input type="checkbox" name="freeDel" id="freedelivery" class="custom-control-input" [(ngModel)]="foodItem.freeDel">
                             <label for="freedelivery" class="custom-control-label">
                                 Free Delivery
                             </label>

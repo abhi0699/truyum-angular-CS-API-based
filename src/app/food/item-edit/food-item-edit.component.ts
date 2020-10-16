@@ -30,11 +30,6 @@ export class FoodItemEditComponent implements OnInit {
     let id: any = param.snapshot.paramMap.get('itemId');
     this.user = this.authService.loggedUser;
     this.getItemById(id as number);
-    this.showUserName();
-   }
-
-   showUserName(){
-     console.log("First: "+this.user.fName);
    }
 
   ngOnInit(): void {
@@ -54,7 +49,7 @@ export class FoodItemEditComponent implements OnInit {
 
   update(){
     this.dateString = this.datepipe.transform(this.foodItem.DOL, 'dd/MM/yyyy');
-    if (this.foodItem.isActive)
+    if (this.foodItem.active)
       this.inStock = 'true';
     else
       this.inStock = 'false';
@@ -63,7 +58,7 @@ export class FoodItemEditComponent implements OnInit {
   saveChanges(form: NgForm): void{
     alert('Form submitted Successfully');
     this.foodItem.DOL = new Date(this.reverse(this.dateString));
-    this.foodItem.isActive = this.inStock == 'true' ? true : false;
+    this.foodItem.active = this.inStock == 'true' ? true : false;
     this.editItem(this.foodItem);
   }
 

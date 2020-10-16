@@ -1,10 +1,10 @@
 export class MenuItem{
     itemId: number;
-    foodName: string;
+    name: string;
     price: number;
-    isActive: boolean;
+    active: boolean;
     category: string;
-    freeDelv: boolean;
+    freeDel: boolean;
     DOL: Date;
     imageURL: string;
 }
