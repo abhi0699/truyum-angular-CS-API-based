@@ -48,7 +48,7 @@ export class FoodItemEditComponent implements OnInit {
 
 
   update(){
-    this.dateString = this.datepipe.transform(this.foodItem.DOL, 'dd/MM/yyyy');
+    this.dateString = this.datepipe.transform(this.foodItem.dol, 'dd/MM/yyyy');
     if (this.foodItem.active)
       this.inStock = 'true';
     else
@@ -57,7 +57,7 @@ export class FoodItemEditComponent implements OnInit {
 
   saveChanges(form: NgForm): void{
     alert('Form submitted Successfully');
-    this.foodItem.DOL = new Date(this.reverse(this.dateString));
+    this.foodItem.dol = new Date(this.reverse(this.dateString));
     this.foodItem.active = this.inStock == 'true' ? true : false;
     this.editItem(this.foodItem);
   }

@@ -43,7 +43,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="text" name="foodName" id="foodName" class="form-control" required 
+                                <input type="text" name="name" id="name" class="form-control" required 
                                 [(ngModel)]="foodItem.name" #name="ngModel">
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-lg-3 pt-1 pb-1">
                         <label for="dateOfLaunch">Date of Launch</label>
-                        <input type="text" name="DOL" id="DOL" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" 
+                        <input type="text" name="DOL" id="DOL" 
                         class="form-control" required [(ngModel)]="foodItem.dol" #DOL="ngModel">
                         <div *ngIf="DOL.touched && DOL.dirty && !DOL.pristine">
                             <span class="small text-danger" *ngIf="DOL.errors?.required">Date is required</span>
@@ -82,14 +82,11 @@
                     </div>
                     <div class="col-lg-3 pt-1 pb-1">
                         <label for="category">Category</label>
-                        <select type="text" name="category" id="category" class="form-control" required [(ngModel)]="foodItem.category" #category="ngModel">
-                            <option value="Starter">Starter</option>
+                        <select type="text" name="category" id="category" class="form-control" [(ngModel)]="foodItem.category" #category="ngModel">
+                            <option value="Starters">Starters</option>
                             <option value="Main Course">Main Course</option>
                             <option value="Dessert">Dessert</option>
                         </select>
-                        <div *ngIf="category.touched && category.dirty && !category.pristine">
-                            <span class="small text-danger" *ngIf="category.errors?.required">Category is required</span>
-                        </div>
                     </div>
                     <div class="col-lg-3 pt-1 pb-1">
                         <label class="d-block">Active</label>

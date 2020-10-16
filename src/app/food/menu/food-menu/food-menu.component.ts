@@ -50,7 +50,7 @@ export class FoodMenuComponent implements OnInit {
         m => {
           items = m;
           items.forEach(x => {
-            x.DOL = this.foodService.date(x.DOL);
+            x.dol = this.foodService.date(x.dol);
             this.menuItemList.push(x);
           });
         },
