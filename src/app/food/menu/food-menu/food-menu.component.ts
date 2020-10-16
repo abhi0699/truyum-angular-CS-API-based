@@ -32,9 +32,13 @@ export class FoodMenuComponent implements OnInit {
         items.forEach(x => {
           this.menuItemList.push(x);
         });
+      console.log(items);
       },
       err => console.log(err)
     );
+  }
+  genList(items: MenuItem){
+    console.log(items);
   }
 
   getMenuItems($event): void {

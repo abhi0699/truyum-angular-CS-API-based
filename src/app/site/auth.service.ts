@@ -31,7 +31,9 @@ export class AuthService
     window.localStorage.setItem('token',this.loggedUser.token);
     window.localStorage.setItem('username', this.loggedUser.userName);
     window.localStorage.setItem('userid', this.loggedUser.userId.toString());
-    window.localStorage.setItem('usertype', this.loggedUser.isAdmin?"Admin":"Customer");
+    window.localStorage.setItem('usertype', this.loggedUser.userType==1?"Admin":"Customer");
+    window.localStorage.setItem('fname', this.loggedUser.fName);
+    window.localStorage.setItem('fname', this.loggedUser.fName);
   }
 
   getToken(){
@@ -48,6 +50,14 @@ export class AuthService
 
   getUserType(){
     return window.localStorage.getItem('usertype');
+  }
+
+  getFName(){
+    return window.localStorage.getItem('fname');
+  }
+
+  getLName(){
+    return window.localStorage.getItem('lname');
   }
 
 }

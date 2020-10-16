@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterEvent, RouterLinkActive } from '@angular/router';
 import { MenuItem } from 'src/app/food-item';
 import { FoodService } from '../food.service';
@@ -17,17 +17,24 @@ import { LoggedUserInfo } from 'src/app/site/user-info';
 })
 export class FoodItemEditComponent implements OnInit {
 
+  user: LoggedUserInfo;
   dateString: string;
   foodItem: MenuItem;
   inStock: string;
+
+  
   foodItemList: Map<number,MenuItem>;
-  user: LoggedUserInfo;
 
   constructor(private param: ActivatedRoute, private foodService: FoodService, public datepipe: DatePipe, private route: Router,  private authService: AuthService) {
     this.foodItemList = new Map<number, MenuItem>();
     let id: any = param.snapshot.paramMap.get('itemId');
     this.user = this.authService.loggedUser;
     this.getItemById(id as number);
+    this.showUserName();
+   }
+
+   showUserName(){
+     console.log("First: "+this.user.fName);
    }
 
   ngOnInit(): void {
@@ -43,6 +50,7 @@ export class FoodItemEditComponent implements OnInit {
       err => console.log(err)
     );
   }
+
 
   update(){
     this.dateString = this.datepipe.transform(this.foodItem.DOL, 'dd/MM/yyyy');

@@ -11,6 +11,8 @@ export class SignoutComponent implements OnInit {
 
   constructor(private authService: AuthService, private route: Router) { 
     authService.loggedInUser=undefined;
+    authService.loggedUser=undefined;
+    window.localStorage.clear();
     route.navigateByUrl('/menu-item-list');
   }
 

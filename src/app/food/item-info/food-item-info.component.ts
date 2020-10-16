@@ -18,11 +18,13 @@ export class FoodItemComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     this.loggedInUser = authService.loggedUser;
-    if(this.loggedInUser==undefined || !this.loggedInUser.isAdmin)
+    if(this.loggedInUser==undefined || !(this.loggedInUser.userType==1))
       this.admin = false;
     else
     this.admin = true;
   }
+
+  
 
   ngOnInit(): void {
   }

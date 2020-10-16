@@ -16,7 +16,7 @@
                 [routerLink]="['/user',user.userName]" class="nav-link text-light">
                     <span class="material-icons align-middle">
                         person
-                    </span>{{user.firstName+' '+user.lastName}}</a></li>
+                    </span>{{user.fName+' '+user.lName}}</a></li>
             <li class="nav-item d-inline"><a [routerLink]="['/sign-out']" 
                 *ngIf="user!=undefined else anonymous" class="nav-link text-light">Signout</a></li>
             <ng-template #anonymous2>
@@ -47,7 +47,6 @@
 
 <ng-template #emptyList>
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-md-10 ml-auto mr-auto text-center">
                 <h1>No Results !</h1>

@@ -18,6 +18,7 @@ import { LoginComponent } from './site/login/login.component';
 import { SignoutComponent } from './site/signout/signout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './site/auth.service';
+import { UserService } from './site/user.service';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { AuthService } from './site/auth.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [FoodService,CartService,DatePipe, AuthService],
+  providers: [FoodService,CartService,DatePipe, AuthService, UserService],
   bootstrap: [MainComponent]
 })
 export class AppModule { }

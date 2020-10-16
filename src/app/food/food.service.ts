@@ -15,7 +15,7 @@ export class FoodService{
   url: string;
   token: string;
   head: HttpHeaders;
-  loggedUser: LoggedUserInfo;
+  loggedUser: LoggedUserInfo
   constructor(private http: HttpClient, private auth: AuthService ) {
    
   }
@@ -29,6 +29,8 @@ export class FoodService{
       this.url = this.customerUrl;
 
     this.token = this.auth.getToken();
+    console.log(this.auth.getUserType());
+    console.log(loggedUser);
     if(loggedUser!=undefined)
     this.head = new HttpHeaders({  
       "Authorization": "bearer "+ this.token
