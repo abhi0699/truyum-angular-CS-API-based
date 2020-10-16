@@ -19,8 +19,8 @@ export class SignupComponent implements OnInit {
     this.user = new User();
     this.signUpForm = this.fb.group({
       userName: new FormControl('',[Validators.required, Validators.minLength(6)]),
-      firstName: new FormControl('',[Validators.required]),
-      lastName: new FormControl('',[Validators.required]),
+      fName: new FormControl('',[Validators.required]),
+      lName: new FormControl('',[Validators.required]),
       password: new FormControl('',[Validators.required]),
       cnfPassword: new FormControl('',[Validators.required])
     },{
@@ -34,8 +34,8 @@ export class SignupComponent implements OnInit {
 
   createUser(newUser: FormGroup): void{
     this.user.userName = newUser.controls['userName'].value;
-    this.user.firstName = newUser.controls['firstName'].value;
-    this.user.lastName = newUser.controls['lastName'].value;
+    this.user.fName = newUser.controls['fName'].value;
+    this.user.lName = newUser.controls['lName'].value;
     this.user.password = newUser.controls['password'].value;
     this.user.admin = false;
     this.signUp(this.user);

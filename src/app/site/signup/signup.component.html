@@ -46,25 +46,25 @@
                         
                         <div class="row pb-2">
                             <div class="col-md-6">
-                                <label for="firstName">First Name</label>
-                                <input type="text" name="firstName" id="firstName" class="form-control"
-                                    placeholder="Enter First Name" formControlName="firstName">
+                                <label for="fName">First Name</label>
+                                <input type="text" name="fName" id="fName" class="form-control"
+                                    placeholder="Enter First Name" formControlName="fName">
                             </div>
                             <div class="col-md-6">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" name="lastName" id="lastName" class="form-control"
-                                    placeholder="Enter Last Name" formControlName="lastName">
+                                <label for="lName">Last Name</label>
+                                <input type="text" name="lName" id="lName" class="form-control"
+                                    placeholder="Enter Last Name" formControlName="lName">
                             </div>
                         </div>
                         <div class="row pb-2">
                             <div class="col-md-6">
-                                <div *ngIf="SignUpForm.firstName.touched">
-                                    <span class="small text-danger" *ngIf="SignUpForm.firstName.errors?.required">Firstname cannot be empty</span>
+                                <div *ngIf="SignUpForm.fName.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.fName.errors?.required">fName cannot be empty</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div *ngIf="SignUpForm.lastName.touched">
-                                    <span class="small text-danger" *ngIf="SignUpForm.lastName.errors?.required">Lastname cannot be empty</span>
+                                <div *ngIf="SignUpForm.lName.touched">
+                                    <span class="small text-danger" *ngIf="SignUpForm.lName.errors?.required">lName cannot be empty</span>
                                 </div>
                             </div>
                         </div>
