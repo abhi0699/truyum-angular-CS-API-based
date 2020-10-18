@@ -9,7 +9,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a [routerLink]="['/menu-item-list']" class="nav-link text-light">Menu Items</a>
             </li>
-            <li  class="nav-item d-inline"><a *ngIf="user!=undefined && !user.admin"
+            <li  class="nav-item d-inline"><a *ngIf="user!=undefined && !user.isAdmin"
                 [routerLink]="['/cart']" class="nav-link text-light">Cart</a>
             </li>
             <li  class="nav-item d-inline"><a *ngIf="user!=undefined else anonymous2"
@@ -31,7 +31,7 @@
     </div>
 </nav>
 
-<app-food-search (searching)="getMenuItem($event)"></app-food-search>
+<app-food-search (searching)="getMenuItems($event)"></app-food-search>
 
 <div *ngIf="menuItemList.length!=0 else emptyList">
     <div class="container-fluid pt-5">

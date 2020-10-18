@@ -1,6 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MenuItem } from 'src/app/food-item';
 import { FoodService } from 'src/app/food/food.service';
+import { AuthService } from 'src/app/site/auth.service';
+import { LoggedUserInfo } from 'src/app/site/user-info';
 import { Cart } from '../cart';
 
 @Injectable({
@@ -9,48 +12,31 @@ import { Cart } from '../cart';
 export class CartService {
 
   cart: Cart;
-  cartMap: Map<number, Cart>;
   userId: number;
+  url: string = 'http://localhost:52462/api/Cart/';
+  token: string;
+  head: HttpHeaders;
 
-  constructor(private foodService: FoodService) {
-    this.cart = new Cart();
-    this.cartMap = new Map<number, Cart>();
+
+  constructor(private foodService: FoodService, private http: HttpClient,private auth: AuthService) {
   }
 
-  generateCart(): void {
+  genHeaders(user: LoggedUserInfo){
+    this.token = this.auth.getToken();
+    this.head = new HttpHeaders({
+      'Authorization': 'bearer '+ this.token
+  })
+}
 
-    let cartItemList = this.foodService.cartMenuItemList;
-
-    if (this.userId = this.foodService.userId) {
-      cartItemList.forEach((i) => {
-        this.cart.menuItemList.push(i);
-      });
-
-      this.cart.calculateTotal();
-
-      this.cartMap.set(this.userId, this.cart);
-      this.foodService.cartMenuItemList = new Array<MenuItem>();
-    }
-
-  }
-  getCartItems(userId: number): Map<number, Cart> {
-    this.generateCart();
-    this.userId = userId;
-    return this.cartMap;
+  getCart(userId: number){
+    return this.http.get<Cart[]>(this.url+userId, {headers: this.head});
   }
 
-  deleteFromCart(itemId: number): void{
-    let newList: Array<MenuItem> = new Array<MenuItem>();
-    this.cart.menuItemList.forEach(m => {
-      if(m.itemId!=itemId)
-        newList.push(m);
-    });
-    this.cart.menuItemList = new Array<MenuItem>();
-    this.cart.menuItemList = newList;
-
-    this.cart.calculateTotal();
-    
-    this.cartMap.set(this.userId, this.cart);
+  addToCart(itemId: number, userId: number){
+    return this.http.post(this.url+userId, itemId, {headers: this.head});
   }
 
+  deleteFromCart(cart: Cart){
+    return this.http.delete(this.url+cart.cartId, {headers: this.head});
+  }
 }

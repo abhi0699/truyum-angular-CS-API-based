@@ -9,7 +9,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a [routerLink]="['/menu-item-list']" class="nav-link text-light">Menu Items</a>
             </li>
-            <li  class="nav-item d-inline"><a *ngIf="user!=undefined && !user.admin" [routerLink]="['/cart']" class="nav-link text-light">Cart</a>
+            <li  class="nav-item d-inline"><a *ngIf="user!=undefined && !user.isAdmin" [routerLink]="['/cart']" class="nav-link text-light">Cart</a>
             </li>
             <li  class="nav-item d-inline"><a *ngIf="user!=undefined else anonymous2"  class="nav-link text-light">
                     <span class="material-icons align-middle">

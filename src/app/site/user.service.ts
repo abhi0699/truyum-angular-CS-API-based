@@ -5,7 +5,7 @@ import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService { 
 
   userList: Array<User>
   url: string = 'http://localhost:52462/api/user'
@@ -16,7 +16,8 @@ export class UserService {
 
   
   addUser(user: User){
-    return this.http.post(this.url, user);
+    console.log(user);
+    return this.http.post(this.url,user);
   }
 
   // getUser(userName: string): User {

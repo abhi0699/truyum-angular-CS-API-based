@@ -6,5 +6,5 @@ export class MenuItem{
     category: string;
     freeDel: boolean;
     dol: Date;
-    imageURL: string;
+    image: string;
 }
